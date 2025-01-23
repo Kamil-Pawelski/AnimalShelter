@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalShelter", "AnimalShelter.csproj", "{BC7DF477-04E2-4C6B-B45B-08E99EE8EA78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalShelter.Tests", "..\AnimalShelter.Tests\AnimalShelter.Tests.csproj", "{24124947-08B2-44C0-8DFE-5225C4EBCA3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC7DF477-04E2-4C6B-B45B-08E99EE8EA78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC7DF477-04E2-4C6B-B45B-08E99EE8EA78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC7DF477-04E2-4C6B-B45B-08E99EE8EA78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC7DF477-04E2-4C6B-B45B-08E99EE8EA78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24124947-08B2-44C0-8DFE-5225C4EBCA3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24124947-08B2-44C0-8DFE-5225C4EBCA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24124947-08B2-44C0-8DFE-5225C4EBCA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24124947-08B2-44C0-8DFE-5225C4EBCA3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
