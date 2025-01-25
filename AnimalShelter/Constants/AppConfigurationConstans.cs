@@ -1,4 +1,4 @@
-﻿namespace AnimalShelter.Infrastructure.Configuration;
+﻿namespace AnimalShelter.Constants;
 
 public static class AppConfigurationConstants
 {

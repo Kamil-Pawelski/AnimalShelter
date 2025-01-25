@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AnimalShelter.App.Routes
+namespace AnimalShelter.App.Routes;
+
+public static class AccountRoutes
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AccountRoutes : ControllerBase
-    {
-    }
+    public const string Register = "/register";
 }
+

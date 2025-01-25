@@ -1,4 +1,5 @@
-﻿using AnimalShelter.Domain.AnimalShelterEntities;
+﻿using AnimalShelter.Constants;
+using AnimalShelter.Domain.AnimalShelterEntities;
 using AnimalShelter.Domain.UserEntities;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,12 @@ public class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<UserRole>()
             .HasKey(ur => new { ur.UserId, ur.RoleId });
+
+        modelBuilder.Entity<Role>()
+            .HasData(
+                new Role { Id = 1, Name = RolesConstants.User },
+                new Role { Id = 2, Name = RolesConstants.Employee }
+            );
 
         modelBuilder.Entity<UserRole>()
             .HasOne(o => o.User)
