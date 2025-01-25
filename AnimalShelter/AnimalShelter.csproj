@@ -14,17 +14,15 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="App\Controllers\" />
     <Folder Include="App\DTO\" />
-    <Folder Include="App\Routes\" />
-    <Folder Include="Configuration\" />
-    <Folder Include="Domain\Repositores\" />
-    <Folder Include="Infrastructure\Repositores\" />
-    <Folder Include="Infrastructure\Services\" />
   </ItemGroup>
 
 </Project>

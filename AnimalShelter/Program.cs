@@ -1,10 +1,13 @@
 ﻿using AnimalShelter.Domain;
+using AnimalShelter.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//AppSetting constants initializer 
+AppConfigurationConstants.Initialize(builder.Configuration);
 
+// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -12,7 +15,7 @@ builder.Services.AddSwaggerGen();
 // Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); // TODO: Move to Configuration
+    options.UseSqlServer(AppConfigurationConstants.SqlServerConnectionString); // TODO: Move to Configuration
 });
 
 
