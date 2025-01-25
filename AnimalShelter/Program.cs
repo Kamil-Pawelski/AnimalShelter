@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 // Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(AppConfigurationConstants.SqlServerConnectionString); // TODO: Move to Configuration
+    options.UseSqlServer(AppConfigurationConstants.SqlServerConnectionString);
 });
 
 
