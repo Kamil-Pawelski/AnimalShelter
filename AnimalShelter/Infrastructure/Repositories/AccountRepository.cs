@@ -37,4 +37,16 @@ public class AccountRepository : IAccountRepository
     {
         return await _dbContext.Users.FirstOrDefaultAsync(user => user.Email == email);
     }
+
+    public async Task<User?> GetUserByUsername(string username)
+    {
+        return await _dbContext.Users.FirstOrDefaultAsync(user => user.Username == username);
+    }
+
+    public async Task<Role?> GetUserRole(int id)
+    {
+        var roleId = await _dbContext.UserRoles.FirstOrDefaultAsync(userRole => userRole.UserId == id);
+
+        return  await _dbContext.Roles.FirstOrDefaultAsync(role => role.Id == roleId.RoleId);
+    }
 }

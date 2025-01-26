@@ -28,4 +28,17 @@ public class AccountController : ControllerBase
 
         return Ok(result.Message);
     }
+
+    [HttpPost(AccountRoutes.Login)]
+    public async Task<IActionResult> Login(LoginCommand loginCommand)
+    {
+        var result = await _mediator.Send(loginCommand);
+
+        if (result.StatusCode != HttpStatusCode.OK)
+        {
+            return StatusCode((int)result.StatusCode, result.Message);
+        }
+
+        return Ok(result.Result);
+    }
 }
