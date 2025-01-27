@@ -48,6 +48,17 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Operation
                 };
             }
 
+            existingUser = await _accountRepository.GetUserByUsername(request.Username);
+
+            if (existingUser != null)
+            {
+                return new OperationResult
+                {
+                    StatusCode = HttpStatusCode.BadRequest,
+                    Message = "User with this username already exists."
+                };
+            }
+
             var newUser = new User
             {
                 Username = request.Username,
