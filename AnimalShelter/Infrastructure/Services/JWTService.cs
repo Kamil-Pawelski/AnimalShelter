@@ -2,6 +2,7 @@
 using AnimalShelter.Domain.Repositores;
 using AnimalShelter.Domain.UserEntities;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -19,6 +20,7 @@ public class JWTService
 
     public async Task<JwtSecurityToken> GenerateJwtToken(User user)
     {
+        Log.Logger.Information("Generating JWT token for user: {Username}", user.Username);
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppConfigurationConstants.JwtSecretKey));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -29,6 +31,7 @@ public class JWTService
             expires: DateTime.Now.AddMinutes(30),
             signingCredentials: creds);
 
+        Log.Logger.Information("LogInformation(\"JWT token generated successfully for user: {Username}\", user.Username)");
         return token;
     }
 
@@ -42,7 +45,7 @@ public class JWTService
         var role = await _accountRepository.GetUserRole(user.Id);
 
         claims.Add(new Claim(ClaimTypes.Role, role.Name));
-        
+        Log.Logger.Information("LogInformation(\"Claims generated for user: {Username}\", user.Username)");
         return claims;
     }
 }

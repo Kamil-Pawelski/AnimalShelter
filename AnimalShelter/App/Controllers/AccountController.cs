@@ -17,9 +17,9 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost(AccountRoutes.Register)]
-    public async Task<IActionResult> Register(RegisterCommand registerCommand)
+    public async Task<IActionResult> Register(RegisterCommand command)
     {
-        var result = await _mediator.Send(registerCommand);
+        var result = await _mediator.Send(command);
 
         if(result.StatusCode != HttpStatusCode.OK) 
         {
@@ -30,9 +30,9 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost(AccountRoutes.Login)]
-    public async Task<IActionResult> Login(LoginCommand loginCommand)
+    public async Task<IActionResult> Login(LoginCommand command)
     {
-        var result = await _mediator.Send(loginCommand);
+        var result = await _mediator.Send(command);
 
         if (result.StatusCode != HttpStatusCode.OK)
         {

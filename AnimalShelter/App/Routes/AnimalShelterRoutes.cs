@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AnimalShelter.App.Routes;
 
-[Route("api/[controller]")]
-[ApiController]
-public class AnimalShelterRoutes : ControllerBase
+public static class AnimalShelterRoutes
 {
+    public const string PostAnimal = "/animals";
+    public const string GetAnimals = "/animals";
 }

@@ -18,6 +18,7 @@ public class AccountHandlerTests
     private readonly LoginCommandHandler _loginCommandHandler;
     private readonly ApplicationDbContext _context;
     private readonly IConfiguration _configuration;
+    // TODO: Move conf to own file
     public AccountHandlerTests()
     {
         var inMemorySettings = new Dictionary<string, string> {
