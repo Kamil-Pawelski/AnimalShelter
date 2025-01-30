@@ -20,19 +20,23 @@ public class JWTService
 
     public async Task<JwtSecurityToken> GenerateJwtToken(User user)
     {
-        Log.Logger.Information("Generating JWT token for user: {Username}", user.Username);
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppConfigurationConstants.JwtSecretKey));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
             issuer: AppConfigurationConstants.JwtIssuer,
             audience: AppConfigurationConstants.JwtAudience,
             claims: await GetClaimsAsync(user),
             expires: DateTime.Now.AddMinutes(30),
-            signingCredentials: creds);
+            signingCredentials: GetSigningCredentials());
 
-        Log.Logger.Information("LogInformation(\"JWT token generated successfully for user: {Username}\", user.Username)");
         return token;
+    }
+
+    private SigningCredentials GetSigningCredentials()
+    {
+        var key = Encoding.UTF8.GetBytes(AppConfigurationConstants.JwtSecretKey);
+        var secret = new SymmetricSecurityKey(key);
+        return new SigningCredentials(secret,
+            SecurityAlgorithms.HmacSha256);
     }
 
     private async Task<List<Claim>> GetClaimsAsync(User user)
@@ -45,7 +49,6 @@ public class JWTService
         var role = await _accountRepository.GetUserRole(user.Id);
 
         claims.Add(new Claim(ClaimTypes.Role, role.Name));
-        Log.Logger.Information("LogInformation(\"Claims generated for user: {Username}\", user.Username)");
         return claims;
     }
 }

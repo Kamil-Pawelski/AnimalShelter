@@ -31,7 +31,7 @@ public class AnimalShelterController : ControllerBase
             return StatusCode((int)result.StatusCode, result.Message);
         }
 
-        return Ok(result.Message);
+        return Ok(result.Result);
     }
 
     [HttpGet(AnimalShelterRoutes.GetAnimals)]
@@ -47,6 +47,37 @@ public class AnimalShelterController : ControllerBase
             return StatusCode((int)result.StatusCode, result.Message);
         }
 
-        return Ok(result.Message);
+        return Ok(result.Result);
+    }
+
+    [HttpGet(AnimalShelterRoutes.GetAnimal)]
+    [Authorize]
+    public async Task<IActionResult> GetAnimal([FromRoute] int id)
+    {
+        var command = new GetAnimalQuery(id);
+        var result = await  _mediator.Send(command);
+
+        if (result.StatusCode != HttpStatusCode.OK)
+        {
+            return StatusCode((int)result.StatusCode, result.Message);
+        }
+
+        return Ok(result.Result);
+    }
+
+    [HttpPut(AnimalShelterRoutes.PutAnimal)]
+    [Authorize(Roles = RolesConstants.Employee)]
+    public async Task<IActionResult> GetAnimal([FromRoute] int id, [FromBody] PutAnimalCommand command)
+    {
+        command.SetId(id);
+        var result = await _mediator.Send(command);
+
+        if (result.StatusCode != HttpStatusCode.OK)
+        {
+            return StatusCode((int)result.StatusCode, result.Message);
+        }
+
+        return Ok(result.Result);
     }
 }
+

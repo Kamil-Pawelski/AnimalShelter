@@ -11,7 +11,7 @@ using System.Net;
 
 namespace AnimalShelter.App.Commands;
 
-public class LoginCommand : IRequest<OperationResult<JwtSecurityToken>>
+public class LoginCommand : IRequest<OperationResult<string>>
 {
     public string Username { get; set; }
     public string Password { get; set; }
@@ -22,7 +22,7 @@ public class LoginCommand : IRequest<OperationResult<JwtSecurityToken>>
     }
 }
 
-public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult<JwtSecurityToken>>
+public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult<string>>
 {
     private readonly IAccountRepository _accountRepository;
     private readonly IPasswordHasher<User> _passwordHasher;
@@ -34,7 +34,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
         _jwtService = jwtService;
     }
 
-    public async Task<OperationResult<JwtSecurityToken>> Handle(LoginCommand request, CancellationToken cancellationToken)
+    public async Task<OperationResult<string>> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
         try
         {
@@ -42,10 +42,10 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
 
             if (user == null)
             {
-                return new OperationResult<JwtSecurityToken>
+                return new OperationResult<string>
                 {
                     StatusCode = HttpStatusCode.BadRequest,
-                    Message = "User with this email already exists."
+                    Message = "Incorrect username."
                 };
             }
 
@@ -53,25 +53,25 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
 
             if (passwordVerify != PasswordVerificationResult.Success)
             {
-                return new OperationResult<JwtSecurityToken>
+                return new OperationResult<string>
                 {
                     StatusCode = HttpStatusCode.BadRequest,
                     Message = "Incorrect password."
                 };
             }
 
-            var jwtToken = await _jwtService.GenerateJwtToken(user);
-
-            return new OperationResult<JwtSecurityToken>
+            var secToken = await _jwtService.GenerateJwtToken(user);
+            var jwt = new JwtSecurityTokenHandler().WriteToken(secToken);
+            return new OperationResult<string>
             {
                 StatusCode = HttpStatusCode.OK,
-                Result = jwtToken
+                Result = jwt
             };
         }
         catch (Exception ex)
         {
             Log.Logger.Error(ex.Message);
-            return new OperationResult<JwtSecurityToken>
+            return new OperationResult<string>
             {
                 StatusCode = HttpStatusCode.InternalServerError,
                 Message = ex.Message

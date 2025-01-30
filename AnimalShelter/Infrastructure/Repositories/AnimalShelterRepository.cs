@@ -1,6 +1,7 @@
 ﻿using AnimalShelter.Domain;
 using AnimalShelter.Domain.AnimalShelterEntities;
 using AnimalShelter.Domain.Repositores;
+using Microsoft.EntityFrameworkCore;
 
 namespace AnimalShelter.Infrastructure.Repositories;
 
@@ -27,5 +28,17 @@ public class AnimalShelterRepository : IAnimalShelterRepository
     public List<Animal> GetAllAnimalsByStatus(AdoptionStatus adoptionStatus)
     {
         return  _context.Animals.Where(animal => animal.AdoptionStatus == adoptionStatus).ToList();
+    }
+
+    public Animal GetAnimalById(int id)
+    {
+        return _context.Animals.FirstOrDefault(animal => animal.Id == id);
+    }
+
+    public async Task<Animal> UpdateAnimal(Animal animal)
+    {
+        _context.Animals.Update(animal);
+        await _context.SaveChangesAsync();
+        return animal;
     }
 }

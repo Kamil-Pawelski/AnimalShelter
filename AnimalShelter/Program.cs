@@ -73,19 +73,6 @@ builder.Services.AddAuthentication(opt =>
         ValidAudience = AppConfigurationConstants.JwtAudience,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppConfigurationConstants.JwtSecretKey))
     };
-    options.Events = new JwtBearerEvents
-    {
-        OnAuthenticationFailed = context =>
-        {
-            Log.Error("Authentication failed: {ErrorMessage}", context.Exception.Message);
-            return Task.CompletedTask;
-        },
-        OnTokenValidated = context =>
-        {
-            Log.Information("Token successfully validated for user: {Username}", context.Principal?.Identity?.Name);
-            return Task.CompletedTask;
-        }
-    };
 });
 
 builder.Services.AddScoped<JWTService>();
