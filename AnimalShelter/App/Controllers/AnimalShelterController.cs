@@ -38,7 +38,7 @@ public class AnimalShelterController : ControllerBase
     [Authorize]
     public async Task<IActionResult> GetAnimals()
     {
-        var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+        var userRole = User.FindFirst(ClaimTypes.Role)!.Value;
 
         var result = await _mediator.Send(new GetAnimalsQuery(userRole));
 
@@ -67,7 +67,7 @@ public class AnimalShelterController : ControllerBase
 
     [HttpPut(AnimalShelterRoutes.PutAnimal)]
     [Authorize(Roles = RolesConstants.Employee)]
-    public async Task<IActionResult> GetAnimal([FromRoute] int id, [FromBody] PutAnimalCommand command)
+    public async Task<IActionResult> PutAnimal([FromRoute] int id, [FromBody] PutAnimalCommand command)
     {
         command.SetId(id);
         var result = await _mediator.Send(command);
@@ -79,5 +79,51 @@ public class AnimalShelterController : ControllerBase
 
         return Ok(result.Result);
     }
-}
 
+
+    [HttpDelete(AnimalShelterRoutes.DeleteAnimal)]
+    [Authorize(Roles = RolesConstants.Employee)]
+    public async Task<IActionResult> DeleteAnimal([FromRoute] int id)
+    {
+        var command = new DeleteAnimalCommand(id);
+
+        var result = await _mediator.Send(command);
+
+        if (result.StatusCode != HttpStatusCode.OK)
+        {
+            return StatusCode((int)result.StatusCode, result.Message);
+        }
+
+        return Ok(result.Message);
+    }
+
+    [HttpPost(AnimalShelterRoutes.PostAdoptAnimal)]
+    [Authorize]
+    public async Task<IActionResult> PostAdoptAnimal(PostAdoptAnimalCommand command)
+    {
+        var result = await _mediator.Send(command);
+
+        if (result.StatusCode != HttpStatusCode.OK)
+        {
+            return StatusCode((int)result.StatusCode, result.Message);
+        }
+
+        return Ok(result.Message);
+    }
+
+    [HttpGet(AnimalShelterRoutes.GetAdoptedAnimals)]
+    [Authorize(Roles = RolesConstants.Employee)]
+    public async Task<IActionResult> GetAdoptedAnimals()
+    {
+        var command =new GetAdoptedAnimalsQuery();
+
+        var result = await _mediator.Send(command);
+
+        if (result.StatusCode != HttpStatusCode.OK)
+        {
+            return StatusCode((int)result.StatusCode, result.Message);
+        }
+
+        return Ok(result.Message);
+    }
+}

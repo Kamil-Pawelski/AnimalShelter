@@ -45,7 +45,7 @@ public class PutAnimalCommandHandler : IRequestHandler<PutAnimalCommand, Operati
     {
         try
         {
-            var animal = _animalShelterRepository.GetAnimalById(request.Id);
+            var animal = await _animalShelterRepository.GetAnimalById(request.Id);
 
             if (animal == null)
             {

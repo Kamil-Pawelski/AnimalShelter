@@ -30,7 +30,7 @@ public class GetAnimalQueryHandler : IRequestHandler<GetAnimalQuery, OperationRe
     {
         try
         {
-            var animal = _animalShelterRepository.GetAnimalById(request.Id);
+            var animal = await _animalShelterRepository.GetAnimalById(request.Id);
 
             if (animal == null)
             {

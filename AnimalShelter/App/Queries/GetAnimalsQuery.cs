@@ -32,14 +32,14 @@ public class GetAnimalsQueryHangled : IRequestHandler<GetAnimalsQuery, Operation
     {
         try
         {
-            var animalList = new List<Animal>();
+            var animalList =  new List<Animal>();
             if (request.UserRole == RolesConstants.User)
             {
-                animalList = _animalShelterRepository.GetAllAnimalsByStatus(AdoptionStatus.Available);
+                animalList = await _animalShelterRepository.GetAllAnimalsByStatus(AdoptionStatus.Available);
             }
             else if (request.UserRole == RolesConstants.Employee)
             {
-                animalList = _animalShelterRepository.GetAllAnimals();
+                animalList = await _animalShelterRepository.GetAllAnimals();
             }
 
             return new OperationResult<List<AnimalDTO>>

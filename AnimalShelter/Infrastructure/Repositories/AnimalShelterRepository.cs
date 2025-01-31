@@ -1,4 +1,5 @@
-﻿using AnimalShelter.Domain;
+﻿using AnimalShelter.App.DTO;
+using AnimalShelter.Domain;
 using AnimalShelter.Domain.AnimalShelterEntities;
 using AnimalShelter.Domain.Repositores;
 using Microsoft.EntityFrameworkCore;
@@ -20,19 +21,49 @@ public class AnimalShelterRepository : IAnimalShelterRepository
         await _context.SaveChangesAsync();
     }
 
-    public List<Animal> GetAllAnimals()
+    public async Task AdoptAnimal(AnimalAdopted animalAdopted)
     {
-        return _context.Animals.ToList();
+        _context.AnimalAdoptions.Add(animalAdopted);
+        await _context.SaveChangesAsync();
     }
 
-    public List<Animal> GetAllAnimalsByStatus(AdoptionStatus adoptionStatus)
+    public async Task DeleteAnimal(Animal animal)
     {
-        return  _context.Animals.Where(animal => animal.AdoptionStatus == adoptionStatus).ToList();
+        _context.Animals.Remove(animal);
+        await _context.SaveChangesAsync();
     }
 
-    public Animal GetAnimalById(int id)
+    public async Task<List<AdoptedAnimalDTO>> GetAdoptedAnimals()
     {
-        return _context.Animals.FirstOrDefault(animal => animal.Id == id);
+        return await _context.Animals
+            .Join(_context.AnimalAdoptions,
+                  animal => animal.Id,
+                  adoption => adoption.AnimalId,
+                  (animal, adoption) => new AdoptedAnimalDTO(
+                      animal.Id,
+                      animal.Name,
+                      animal.Species,
+                      adoption.UserId,
+                      adoption.AdoptionDate
+                  ))
+            .ToListAsync();
+    }
+
+    public async Task<List<Animal>> GetAllAnimals()
+    {
+        return await _context.Animals.ToListAsync();
+    }
+
+    public async Task<List<Animal>> GetAllAnimalsByStatus(AdoptionStatus adoptionStatus)
+    {
+        return await _context.Animals
+            .Where(animal => animal.AdoptionStatus == adoptionStatus)
+            .ToListAsync();
+    }
+
+    public async Task<Animal?> GetAnimalById(int id)
+    {
+        return await _context.Animals.FindAsync(id);
     }
 
     public async Task<Animal> UpdateAnimal(Animal animal)

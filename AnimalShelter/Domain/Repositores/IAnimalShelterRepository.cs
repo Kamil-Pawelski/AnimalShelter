@@ -1,12 +1,17 @@
-﻿using AnimalShelter.Domain.AnimalShelterEntities;
+﻿using AnimalShelter.App.DTO;
+using AnimalShelter.Domain.AnimalShelterEntities;
 
 namespace AnimalShelter.Domain.Repositores;
 
 public interface IAnimalShelterRepository
 {
     Task AddAnimal(Animal animal);
-    List<Animal> GetAllAnimalsByStatus(AdoptionStatus adoptionStatus);
-    List<Animal> GetAllAnimals();
-    Animal GetAnimalById(int id);
+    Task<List<Animal>> GetAllAnimalsByStatus(AdoptionStatus adoptionStatus);
+    Task<List<Animal>> GetAllAnimals();
+    Task<Animal?> GetAnimalById(int id);
     Task<Animal> UpdateAnimal(Animal animal);
+    Task DeleteAnimal(Animal animal);
+    Task AdoptAnimal(AnimalAdopted animalAdopted);
+    Task<List<AdoptedAnimalDTO>> GetAdoptedAnimals();
 }
+
