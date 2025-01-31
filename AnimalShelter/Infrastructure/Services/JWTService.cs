@@ -33,7 +33,7 @@ public class JWTService
 
     private SigningCredentials GetSigningCredentials()
     {
-        var key = Encoding.UTF8.GetBytes(AppConfigurationConstants.JwtSecretKey);
+        var key = Encoding.UTF8.GetBytes(AppConfigurationConstants.JwtSecretKey!);
         var secret = new SymmetricSecurityKey(key);
         return new SigningCredentials(secret,
             SecurityAlgorithms.HmacSha256);

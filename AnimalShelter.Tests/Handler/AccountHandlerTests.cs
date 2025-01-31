@@ -7,10 +7,9 @@ using AnimalShelter.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using NSubstitute;
 using System.Net;
 
-namespace AnimalShelter.Tests.Controller;
+namespace AnimalShelter.Tests.Handler;
 
 public class AccountHandlerTests
 {
@@ -24,11 +23,11 @@ public class AccountHandlerTests
         var inMemorySettings = new Dictionary<string, string> {
             {"JWT:SecretKey", "1d0e043507dd1c288d5b696a2ad8b2e8958cf179b4faf12462f4baccc1e3a1b216d8728f97fcae555e749028c0d5bffa0cd7e95ab5b896bbaee1d93d181b207a"},
             {"JWT:Issuer", "TestIssuer"},
-            {"JWT:Audience", "TestAudience"},    
+            {"JWT:Audience", "TestAudience"},
         };
 
         _configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(inMemorySettings)
+            .AddInMemoryCollection(inMemorySettings!)
             .Build();
 
         AppConfigurationConstants.Initialize(_configuration);
@@ -55,22 +54,29 @@ public class AccountHandlerTests
         {
             Username = "TestUser",
             Email = "testaccount@test.com",
-            Password = passwordHasher.HashPassword(null, "Password123!")
         };
 
-        var role = new Role
+        user.Password = passwordHasher.HashPassword(user, "Password123!");
+        var empRole = new Role
         {
-            Name = "Employee",
+            Name = RolesConstants.Employee
+        };
+
+        var usrRole = new Role
+        {
+            Name = RolesConstants.User
         };
 
         _context.Users.Add(user);
-        _context.Roles.Add(role);
+        _context.Roles.Add(empRole);
+        _context.Roles.Add(usrRole);
 
         var UserRoles = new UserRole
         {
-            RoleId = role.Id,
+            RoleId = empRole.Id,
             UserId = user.Id
         };
+
         _context.UserRoles.Add(UserRoles);
         _context.SaveChanges();
     }
@@ -118,5 +124,25 @@ public class AccountHandlerTests
         var result = await _loginCommandHandler.Handle(command, CancellationToken.None);
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
         Assert.NotNull(result.Result);
+    }
+
+    [Fact]
+    public async Task Login_WrongUsername_BadRequest()
+    {
+        var command = new LoginCommand("Wrong", "Password123!");
+
+        var result = await _loginCommandHandler.Handle(command, CancellationToken.None);
+        Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
+        Assert.Equal("The user with the given username does not exist", result.Message);
+    }
+
+    [Fact]
+    public async Task Login_WrongPassword_BadRequest()
+    {
+        var command = new LoginCommand("TestUser", "Wrong123!");
+
+        var result = await _loginCommandHandler.Handle(command, CancellationToken.None);
+        Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
+        Assert.Equal("Incorrect password.", result.Message);
     }
 }

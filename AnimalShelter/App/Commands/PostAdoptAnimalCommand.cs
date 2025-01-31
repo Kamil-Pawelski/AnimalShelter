@@ -37,8 +37,8 @@ public class PostAdoptAnimalCommandHandler : IRequestHandler<PostAdoptAnimalComm
             {
                 return new OperationResult
                 {
-                    StatusCode = HttpStatusCode.NotFound,
-                    Message = "Not found"
+                    StatusCode = HttpStatusCode.BadRequest,
+                    Message = "The animal with the given id does not exist."
                 };
             }
 
@@ -47,7 +47,7 @@ public class PostAdoptAnimalCommandHandler : IRequestHandler<PostAdoptAnimalComm
                 return new OperationResult
                 {
                     StatusCode = HttpStatusCode.Conflict,
-                    Message = "Animal is already adopted"
+                    Message = "The animal is already adopted."
                 };
             }
 

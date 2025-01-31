@@ -34,8 +34,8 @@ public class DeleteAnimalCommandHandler : IRequestHandler<DeleteAnimalCommand, O
             {
                 return new OperationResult
                 {
-                    StatusCode = HttpStatusCode.NotFound,
-                    Message = "Not found"
+                    StatusCode = HttpStatusCode.BadRequest,
+                    Message = "The animal with the given id does not exist."
                 };
             }    
             

@@ -19,11 +19,11 @@ public class GetAnimalsQuery : IRequest<OperationResult<List<AnimalDTO>>>
     }
 }
 
-public class GetAnimalsQueryHangled : IRequestHandler<GetAnimalsQuery, OperationResult<List<AnimalDTO>>>
+public class GetAnimalsQueryHandler : IRequestHandler<GetAnimalsQuery, OperationResult<List<AnimalDTO>>>
 {
     private readonly IAnimalShelterRepository _animalShelterRepository;
 
-    public GetAnimalsQueryHangled(IAnimalShelterRepository animalShelterRepository)
+    public GetAnimalsQueryHandler(IAnimalShelterRepository animalShelterRepository)
     {
         _animalShelterRepository = animalShelterRepository;
     }
@@ -40,6 +40,14 @@ public class GetAnimalsQueryHangled : IRequestHandler<GetAnimalsQuery, Operation
             else if (request.UserRole == RolesConstants.Employee)
             {
                 animalList = await _animalShelterRepository.GetAllAnimals();
+            }
+            else 
+            {
+                return new OperationResult<List<AnimalDTO>>
+                {
+                    StatusCode = HttpStatusCode.Unauthorized,
+                    Message = "Please log in."
+                };
             }
 
             return new OperationResult<List<AnimalDTO>>

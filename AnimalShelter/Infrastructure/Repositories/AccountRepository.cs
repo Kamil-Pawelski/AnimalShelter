@@ -28,9 +28,9 @@ public class AccountRepository : IAccountRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<Role?> GetRole(string name)
+    public async Task<Role> GetRole(string name)
     {
-        return await _dbContext.Roles.FirstOrDefaultAsync(role => role.Name == name);
+        return await _dbContext.Roles.FirstAsync(role => role.Name == name);
     }
 
     public async Task<User?> GetUserByEmail(string email)
@@ -43,10 +43,10 @@ public class AccountRepository : IAccountRepository
         return await _dbContext.Users.FirstOrDefaultAsync(user => user.Username == username);
     }
 
-    public async Task<Role?> GetUserRole(int id)
+    public async Task<Role> GetUserRole(int id)
     {
-        var roleId = await _dbContext.UserRoles.FirstOrDefaultAsync(userRole => userRole.UserId == id);
+        var roleId = await _dbContext.UserRoles.FirstAsync(userRole => userRole.UserId == id);
 
-        return  await _dbContext.Roles.FirstOrDefaultAsync(role => role.Id == roleId.RoleId);
+        return  await _dbContext.Roles.FirstAsync(role => role.Id == roleId.RoleId);
     }
 }

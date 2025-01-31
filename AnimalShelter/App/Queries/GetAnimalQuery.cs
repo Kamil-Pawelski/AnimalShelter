@@ -36,8 +36,8 @@ public class GetAnimalQueryHandler : IRequestHandler<GetAnimalQuery, OperationRe
             {
                 return new OperationResult<AnimalDTO>()
                 {
-                    StatusCode = HttpStatusCode.NotFound,
-                    Message = $"Wrong id"
+                    StatusCode = HttpStatusCode.BadRequest,
+                    Message = $"The animal with the given ID does not exist."
                 };
             }
 
