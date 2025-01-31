@@ -20,15 +20,9 @@ public class AnimalShelterHandlerTests
 
     public AnimalShelterHandlerTests()
     {
-        var inMemorySettings = new Dictionary<string, string> {
-            {"JWT:SecretKey", "1d0e043507dd1c288d5b696a2ad8b2e8958cf179b4faf12462f4baccc1e3a1b216d8728f97fcae555e749028c0d5bffa0cd7e95ab5b896bbaee1d93d181b207a"},
-            {"JWT:Issuer", "TestIssuer"},
-            {"JWT:Audience", "TestAudience"},
-        };
-
         _configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(inMemorySettings!)
-            .Build();
+               .AddJsonFile("appsettings.Test.json")
+               .Build();
 
         AppConfigurationConstants.Initialize(_configuration);
 
