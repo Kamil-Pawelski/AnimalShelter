@@ -2,12 +2,8 @@
 using AnimalShelter.Domain;
 using AnimalShelter.Domain.AnimalShelterEntities;
 using AnimalShelter.Domain.Repositores;
-using AnimalShelter.Infrastructure.Repositories;
-using AnimalShelter.Infrastructure.Services;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Serilog;
-using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 
 namespace AnimalShelter.App.Commands;

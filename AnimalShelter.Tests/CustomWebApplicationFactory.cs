@@ -3,15 +3,8 @@ using AnimalShelter.Tests.Controller;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AnimalShelter.Tests
 {
@@ -43,10 +36,7 @@ namespace AnimalShelter.Tests
                 using (var scope = services.BuildServiceProvider().CreateScope())
                 {
                     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                    db.Database.ExecuteSqlRaw("DELETE FROM [ANIMALADOPTIONS]");
-                    db.Database.ExecuteSqlRaw("DELETE FROM [USERROLES]");
-                    db.Database.ExecuteSqlRaw("DELETE FROM [ANIMALS]");
-                    db.Database.ExecuteSqlRaw("DELETE FROM [USERS]");
+                    db.Database.EnsureDeleted();
                     db.Database.Migrate();
                 }
             });
