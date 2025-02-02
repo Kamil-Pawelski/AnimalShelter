@@ -83,7 +83,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Operation
             return new OperationResult
             {
                 StatusCode = HttpStatusCode.OK,
-                Message = "User registered successfully"
+                Message = "User registered successfully."
             };
         }
         catch (Exception ex)

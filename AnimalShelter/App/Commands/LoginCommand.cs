@@ -44,7 +44,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
                 return new OperationResult<string>
                 {
                     StatusCode = HttpStatusCode.BadRequest,
-                    Message = "The user with the given username does not exist"
+                    Message = "The user with the given username does not exist."
                 };
             }
 

@@ -85,7 +85,7 @@ public class AccountHandlerTests
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
         Assert.Equal(command.Email, user?.Email);
-        Assert.Equal("User registered successfully", result.Message);
+        Assert.Equal("User registered successfully.", result.Message);
     }
 
     [Fact]
@@ -127,7 +127,7 @@ public class AccountHandlerTests
 
         var result = await _loginCommandHandler.Handle(command, CancellationToken.None);
         Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
-        Assert.Equal("The user with the given username does not exist", result.Message);
+        Assert.Equal("The user with the given username does not exist.", result.Message);
     }
 
     [Fact]
