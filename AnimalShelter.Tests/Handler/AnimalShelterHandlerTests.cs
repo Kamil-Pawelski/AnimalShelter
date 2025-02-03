@@ -99,14 +99,14 @@ public class AnimalShelterHandlerTests
     }
 
     [Fact]
-    public async Task GetAnimal_BadRequest()
+    public async Task GetAnimal_NotFound()
     {
         var command = new GetAnimalQuery(100);
         var getAnimalQueryHandler = new GetAnimalQueryHandler(_animalShelterRepository);
 
         var result = await getAnimalQueryHandler.Handle(command, CancellationToken.None);
 
-        Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
         Assert.Null(result.Result);
     }
 
@@ -168,11 +168,11 @@ public class AnimalShelterHandlerTests
         var result = await deleteAnimalCommandHandler.Handle(command, CancellationToken.None);
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
-        Assert.Equal($"Animal with id {id} has been removed from the shelter.", result.Message);
+        Assert.Equal($"Animal with ID {id} has been removed from the shelter.", result.Message);
     }
 
     [Fact]
-    public async Task DeleteAnimal_BadRequest()
+    public async Task DeleteAnimal_NotFound()
     {
         var command = new DeleteAnimalCommand(100);
 
@@ -180,8 +180,8 @@ public class AnimalShelterHandlerTests
 
         var result = await deleteAnimalCommandHandler.Handle(command, CancellationToken.None);
 
-        Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
-        Assert.Equal("The animal with the given id does not exist.", result.Message);
+        Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
+        Assert.Equal("The animal with the given ID does not exist.", result.Message);
     }
 
     [Fact]
@@ -211,7 +211,7 @@ public class AnimalShelterHandlerTests
     }
 
     [Fact]
-    public async Task PostAdopt_BadRequest()
+    public async Task PostAdopt_NotFound()
     {
         var command = new PostAdoptAnimalCommand(1, 2000);
 
@@ -219,8 +219,8 @@ public class AnimalShelterHandlerTests
 
         var result = await postAdoptAnimalCommandHandler.Handle(command, CancellationToken.None);
 
-        Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
-        Assert.Equal("The animal with the given id does not exist.", result.Message);
+        Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
+        Assert.Equal("The animal with the given ID does not exist.", result.Message);
     }
     [Fact]
     public async Task GetAdoptedAnimal_Ok()

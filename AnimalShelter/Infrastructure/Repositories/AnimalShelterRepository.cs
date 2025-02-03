@@ -43,7 +43,7 @@ public class AnimalShelterRepository : IAnimalShelterRepository
                       animal.Id,
                       animal.Name,
                       animal.Species,
-                      adoption.UserId,
+                      adoption.UserId.ToString(),
                       adoption.AdoptionDate
                   ))
             .ToListAsync();

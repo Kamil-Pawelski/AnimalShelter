@@ -7,7 +7,7 @@ public class AdoptedAnimalDTO
     public string Species { get; set; }
     public string AdoptedBy { get; set; }
     public DateTime AdoptedDate { get; set; }
-    public AdoptedAnimalDTO(int id, string name, string species, int adoptedBy, DateTime adoptedDate)
+    public AdoptedAnimalDTO(int id, string name, string species, string adoptedBy, DateTime adoptedDate)
     {
         Id = id;
         Name = name;

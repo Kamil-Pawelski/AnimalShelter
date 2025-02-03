@@ -52,7 +52,7 @@ public class PutAnimalCommandHandler : IRequestHandler<PutAnimalCommand, Operati
                 return new OperationResult<AnimalDTO>()
                 {
                     StatusCode = HttpStatusCode.NotFound,
-                    Message = $"The animal with the given id does not exist."
+                    Message = $"The animal with the given ID does not exist."
                 };
             }
 

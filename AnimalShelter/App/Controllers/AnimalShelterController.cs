@@ -124,6 +124,6 @@ public class AnimalShelterController : ControllerBase
             return StatusCode((int)result.StatusCode, result.Message);
         }
 
-        return Ok(result.Message);
+        return Ok(result.Result);
     }
 }

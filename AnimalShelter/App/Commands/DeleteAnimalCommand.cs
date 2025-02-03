@@ -33,8 +33,8 @@ public class DeleteAnimalCommandHandler : IRequestHandler<DeleteAnimalCommand, O
             {
                 return new OperationResult
                 {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Message = "The animal with the given id does not exist."
+                    StatusCode = HttpStatusCode.NotFound,
+                    Message = "The animal with the given ID does not exist."
                 };
             }    
             
@@ -43,7 +43,7 @@ public class DeleteAnimalCommandHandler : IRequestHandler<DeleteAnimalCommand, O
             return new OperationResult
             {
                 StatusCode = HttpStatusCode.OK,
-                Message = $"Animal with id {request.Id} has been removed from the shelter."
+                Message = $"Animal with ID {request.Id} has been removed from the shelter."
             };
         }
         catch (Exception ex)

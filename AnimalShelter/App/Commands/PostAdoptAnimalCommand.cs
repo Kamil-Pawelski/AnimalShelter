@@ -37,8 +37,8 @@ public class PostAdoptAnimalCommandHandler : IRequestHandler<PostAdoptAnimalComm
             {
                 return new OperationResult
                 {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Message = "The animal with the given id does not exist."
+                    StatusCode = HttpStatusCode.NotFound,
+                    Message = "The animal with the given ID does not exist."
                 };
             }
 
