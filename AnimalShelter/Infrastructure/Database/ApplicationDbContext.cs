@@ -1,9 +1,9 @@
-﻿using AnimalShelter.Constants;
-using AnimalShelter.Domain.AnimalShelterEntities;
+﻿using AnimalShelter.Domain.AnimalShelterEntities;
+using AnimalShelter.Domain.Constants;
 using AnimalShelter.Domain.UserEntities;
 using Microsoft.EntityFrameworkCore;
 
-namespace AnimalShelter.Domain;
+namespace AnimalShelter.Infrastructure.Database;
 
 public class ApplicationDbContext : DbContext
 {

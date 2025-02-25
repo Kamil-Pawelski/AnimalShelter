@@ -1,7 +1,7 @@
-﻿using AnimalShelter.Constants;
-using AnimalShelter.Domain;
+﻿using AnimalShelter.Domain.Constants;
 using AnimalShelter.Domain.Repositores;
 using AnimalShelter.Domain.UserEntities;
+using AnimalShelter.Infrastructure.Database;
 using AnimalShelter.Infrastructure.Repositories;
 using AnimalShelter.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -76,7 +76,7 @@ builder.Services.AddAuthentication(opt =>
     };
 });
 
-builder.Services.AddScoped<JWTService>();
+builder.Services.AddScoped<TokenProvider>();
 
 // Mediator
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));

@@ -1,7 +1,7 @@
-﻿using AnimalShelter.Constants;
-using AnimalShelter.Domain;
-using AnimalShelter.Domain.AnimalShelterEntities;
+﻿using AnimalShelter.Domain.AnimalShelterEntities;
+using AnimalShelter.Domain.Constants;
 using AnimalShelter.Domain.UserEntities;
+using AnimalShelter.Infrastructure.Database;
 using AnimalShelter.Tests.Controller;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;

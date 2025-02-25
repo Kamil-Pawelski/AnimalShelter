@@ -1,4 +1,4 @@
-﻿using AnimalShelter.Constants;
+﻿using AnimalShelter.Domain.Constants;
 using AnimalShelter.Domain.Repositores;
 using AnimalShelter.Domain.UserEntities;
 using Microsoft.IdentityModel.Tokens;
@@ -9,11 +9,11 @@ using System.Text;
 
 namespace AnimalShelter.Infrastructure.Services;
 
-public class JWTService
+public class TokenProvider
 {
     private readonly IAccountRepository _accountRepository;
 
-    public JWTService(IAccountRepository accountRepository)
+    public TokenProvider(IAccountRepository accountRepository)
     {
         _accountRepository = accountRepository;
     }

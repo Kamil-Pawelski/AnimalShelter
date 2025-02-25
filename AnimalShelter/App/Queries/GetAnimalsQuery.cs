@@ -1,7 +1,7 @@
 ﻿using AnimalShelter.App.DTO;
-using AnimalShelter.Constants;
-using AnimalShelter.Domain;
 using AnimalShelter.Domain.AnimalShelterEntities;
+using AnimalShelter.Domain.Common;
+using AnimalShelter.Domain.Constants;
 using AnimalShelter.Domain.Repositores;
 using MediatR;
 using Serilog;

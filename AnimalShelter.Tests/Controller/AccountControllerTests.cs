@@ -1,12 +1,12 @@
 ﻿using AnimalShelter.App.Commands;
 using AnimalShelter.App.Routes;
 using AnimalShelter.Constants;
-using AnimalShelter.Domain;
 using AnimalShelter.Domain.UserEntities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Json;
 using System.Net;
+using AnimalShelter.Infrastructure.Database;
 
 namespace AnimalShelter.Tests.Controller;
 

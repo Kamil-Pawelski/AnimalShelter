@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace AnimalShelter.Constants;
+namespace AnimalShelter.Domain.Constants;
 
 public static class AppConfigurationConstants
 {

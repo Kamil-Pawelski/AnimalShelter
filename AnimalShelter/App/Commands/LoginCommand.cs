@@ -1,4 +1,4 @@
-﻿using AnimalShelter.Domain;
+﻿using AnimalShelter.Domain.Common;
 using AnimalShelter.Domain.Repositores;
 using AnimalShelter.Domain.UserEntities;
 using AnimalShelter.Infrastructure.Services;
@@ -25,12 +25,12 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
 {
     private readonly IAccountRepository _accountRepository;
     private readonly IPasswordHasher<User> _passwordHasher;
-    private readonly JWTService _jwtService;
-    public LoginCommandHandler(IAccountRepository accountRepository, IPasswordHasher<User> passwordHasher, JWTService jwtService)
+    private readonly TokenProvider _tokenProvider;
+    public LoginCommandHandler(IAccountRepository accountRepository, IPasswordHasher<User> passwordHasher, TokenProvider tokenProvider)
     {
         _accountRepository = accountRepository;
         _passwordHasher = passwordHasher;
-        _jwtService = jwtService;
+        _tokenProvider = tokenProvider;
     }
 
     public async Task<OperationResult<string>> Handle(LoginCommand request, CancellationToken cancellationToken)
@@ -59,7 +59,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, OperationResult
                 };
             }
 
-            var secToken = await _jwtService.GenerateJwtToken(user);
+            var secToken = await _tokenProvider.GenerateJwtToken(user);
             var jwt = new JwtSecurityTokenHandler().WriteToken(secToken);
             return new OperationResult<string>
             {

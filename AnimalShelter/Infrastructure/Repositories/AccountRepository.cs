@@ -1,6 +1,6 @@
-﻿using AnimalShelter.Domain;
-using AnimalShelter.Domain.Repositores;
+﻿using AnimalShelter.Domain.Repositores;
 using AnimalShelter.Domain.UserEntities;
+using AnimalShelter.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace AnimalShelter.Infrastructure.Repositories;

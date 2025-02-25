@@ -1,5 +1,5 @@
-﻿using AnimalShelter.Constants;
-using AnimalShelter.Domain;
+﻿using AnimalShelter.Domain.Common;
+using AnimalShelter.Domain.Constants;
 using AnimalShelter.Domain.Repositores;
 using AnimalShelter.Domain.UserEntities;
 using MediatR;

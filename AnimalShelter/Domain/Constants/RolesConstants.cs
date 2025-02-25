@@ -1,4 +1,4 @@
-﻿namespace AnimalShelter.Constants;
+﻿namespace AnimalShelter.Domain.Constants;
 
 public static class RolesConstants
 {

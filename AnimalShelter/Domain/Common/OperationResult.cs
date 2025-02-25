@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace AnimalShelter.Domain;
+namespace AnimalShelter.Domain.Common;
 
 public class OperationResult
 {

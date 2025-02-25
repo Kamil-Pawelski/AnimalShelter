@@ -1,5 +1,5 @@
-﻿using AnimalShelter.Domain;
-using AnimalShelter.Domain.AnimalShelterEntities;
+﻿using AnimalShelter.Domain.AnimalShelterEntities;
+using AnimalShelter.Domain.Common;
 using AnimalShelter.Domain.Repositores;
 using MediatR;
 using Serilog;

@@ -1,7 +1,7 @@
 using AnimalShelter.App.Commands;
-using AnimalShelter.Constants;
-using AnimalShelter.Domain;
+using AnimalShelter.Domain.Constants;
 using AnimalShelter.Domain.UserEntities;
+using AnimalShelter.Infrastructure.Database;
 using AnimalShelter.Infrastructure.Repositories;
 using AnimalShelter.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
@@ -34,7 +34,7 @@ public class AccountHandlerTests
 
         var accountRepository = new AccountRepository(_context);
         var passwordHasher = new PasswordHasher<User>();
-        var jwtService = new JWTService(accountRepository);
+        var jwtService = new TokenProvider(accountRepository);
 
         _registerCommandHandler = new RegisterCommandHandler(accountRepository, passwordHasher);
         _loginCommandHandler = new LoginCommandHandler(accountRepository, passwordHasher, jwtService);

@@ -1,7 +1,7 @@
 ﻿using AnimalShelter.App.Commands;
 using AnimalShelter.App.Queries;
 using AnimalShelter.App.Routes;
-using AnimalShelter.Constants;
+using AnimalShelter.Domain.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

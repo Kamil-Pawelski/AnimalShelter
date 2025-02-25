@@ -1,9 +1,9 @@
 ﻿using AnimalShelter.App.Commands;
 using AnimalShelter.App.Queries;
-using AnimalShelter.Constants;
-using AnimalShelter.Domain;
 using AnimalShelter.Domain.AnimalShelterEntities;
+using AnimalShelter.Domain.Constants;
 using AnimalShelter.Domain.Repositores;
+using AnimalShelter.Infrastructure.Database;
 using AnimalShelter.Infrastructure.Repositories;
 using Azure.Core;
 using Microsoft.EntityFrameworkCore;
