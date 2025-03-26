@@ -19,6 +19,19 @@ var builder = WebApplication.CreateBuilder(args);
 //AppSetting constants initializer 
 AppConfigurationConstants.Initialize(builder.Configuration);
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+});
+
+
 // Add services to the container.
 builder.Services.AddControllers(options => options.Filters.Add(new ProducesAttribute("application/json")));
 builder.Services.AddEndpointsApiExplorer();
@@ -104,6 +117,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseCors("AllowAllOrigins");
 
 app.MapControllers();
 
