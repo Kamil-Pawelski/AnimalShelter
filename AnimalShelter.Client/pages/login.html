@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login - Animal Shelter</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+    <script src="../scripts/main.js" defer></script>
+  </head>
+  <body>
+    <div id="header"></div>
+
+    <section class="login">
+      <h2>Login</h2>
+      <form action="login-process.php" method="POST">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+
+        <button type="submit" class="btn">Login</button>
+      </form>
+    </section>
+  </body>
+</html>
