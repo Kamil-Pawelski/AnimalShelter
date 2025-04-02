@@ -5,15 +5,16 @@
     <title>Login - Animal Shelter</title>
     <link rel="stylesheet" href="../styles/main.css" />
     <script src="../scripts/main.js" defer></script>
+    <script src="../scripts/login.js" defer></script>
   </head>
   <body>
     <div id="header"></div>
 
     <section class="login">
       <h2>Login</h2>
-      <form action="login-process.php" method="POST">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required />
+      <form id="login-form">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
 
         <label for="password">Password</label>
         <input type="password" id="password" name="password" required />
